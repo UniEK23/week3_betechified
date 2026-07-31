@@ -1,6 +1,12 @@
+require('dotenv').config();
+
 const express = require('express');
+const cors = require('cors');
+
 const app = express();
+
 app.use(express.json()); // Parse JSON bodies
+app.use(cors('*'));
 
 let todos = [
   { id: 1, task: 'Learn Node.js', completed: false },
@@ -73,5 +79,6 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Server error!' });
 });
 
-const PORT = 3002;
+const PORT = process.env.PORT || 3000;
+
 app.listen(PORT, () => console.log(`Server on port ${PORT}`));
